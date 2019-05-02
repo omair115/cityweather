@@ -7,15 +7,32 @@ import InputBase from '@material-ui/core/InputBase';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import styles from './style'
-
-
+import Button from '@material-ui/core/Button';
+import axios from 'axios';
+import f from './functios'
 class Main extends Component{
     constructor(props){
     super(props)
         this.state={
-               inputWeather:''
+               inputWeather:'',
+               maxTemp:'',
+               minTemp:''
         }
     }
+    componentDidMountMaxTemp=f.componentDidMountMaxTemp.bind(this)
+    componentDidMountMinTemp=f.componentDidMountMinTemp.bind(this)
+    componentDidMountfunction() {
+    this.componentDidMountMaxTemp()
+    this.componentDidMountMinTemp()    
+
+}
+    handleChangeButon(){
+            componentDidMount()
+            this.componentDidMountfunction() 
+            
+    }
+            
+    
     handleChange(e){
         this.setState({inputWeather:e.target.value})
         console.log('uamri',this.state.inputWeather)
@@ -44,7 +61,18 @@ class Main extends Component{
               value={this.state.inputWeather}
             />
           </div>
+            <Button style={{ backgroundColor: '#007bff'}}
+            onClick={this.handleChangeButon()}
+            >Get</Button>
         </Toolbar>
+        <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+            {this.state.minTemp}
+           
+          </Typography>
+          <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+            {this.state.minTemp}
+           
+          </Typography>
       </AppBar>
     </div>
   );
