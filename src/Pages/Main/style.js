@@ -11,10 +11,7 @@ const styles = theme => ({
       marginRight: 20,
     },
     title: {
-      display: 'none',
-      [theme.breakpoints.up('sm')]: {
-        display: 'block',
-      },
+    marginLeft:'20px'
     },
     search: {
       position: 'relative',

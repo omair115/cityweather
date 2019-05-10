@@ -8,34 +8,31 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import styles from './style'
 import Button from '@material-ui/core/Button';
-import axios from 'axios';
 import f from './functios'
 class Main extends Component{
     constructor(props){
-    super(props)
-        this.state={
-               inputWeather:'',
-               maxTemp:'',
-               minTemp:''
-        }
+      super(props)
+      this.state={
+        inputWeather:'',
+        minTemp:'',
+        maxTemp:'',
+        descp:'',
+        change:false
+      }
+      this.componentDidMountMinTemp=f.componentDidMountMinTemp.bind(this)
+      this.componentDidMountMaxTemp=f.componentDidMountMaxTemp.bind(this)
+      this.componentDidMountDescTemp=f.componentDidMountDescTemp.bind(this)
     }
-    componentDidMountMaxTemp=f.componentDidMountMaxTemp.bind(this)
-    componentDidMountMinTemp=f.componentDidMountMinTemp.bind(this)
-    componentDidMountfunction() {
-    this.componentDidMountMaxTemp()
-    this.componentDidMountMinTemp()    
+    handleChangeButton = this.handleChangeButton.bind(this)
 
-}
-    handleChangeButon(){
-            componentDidMount()
-            this.componentDidMountfunction() 
-            
-    }
-            
-    
+  handleChangeButton(){
+          this.componentDidMountMinTemp()
+          this.componentDidMountMaxTemp()
+          this.componentDidMountDescTemp()
+          this.setState({change:!this.state.change})
+  }
     handleChange(e){
         this.setState({inputWeather:e.target.value})
-        console.log('uamri',this.state.inputWeather)
     }
     render(){
         const { classes } = this.props;
@@ -50,7 +47,7 @@ class Main extends Component{
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
-            </div>
+          </div>
             <InputBase
               placeholder="Search…"
               classes={{
@@ -62,22 +59,27 @@ class Main extends Component{
             />
           </div>
             <Button style={{ backgroundColor: '#007bff'}}
-            onClick={this.handleChangeButon()}
-            >Get</Button>
+            onClick={this.handleChangeButton }>Get</Button>
         </Toolbar>
+        {this.state.change===true?
+        <div>
         <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-            {this.state.minTemp}
-           
-          </Typography>
-          <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-            {this.state.minTemp}
-           
-          </Typography>
-      </AppBar>
+            Minimum Temperature  =>    {this.state.minTemp}
+        </Typography>
+         <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+         Maximum Temperature   =>     {this.state.maxTemp}
+     </Typography>
+     <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+         Weather Description    =>    {this.state.descp}
+     </Typography>
+     </div>
+        : null
+      }
+       </AppBar>
     </div>
   );
 }
-  }
+}
  
 
 Main.propTypes = {
